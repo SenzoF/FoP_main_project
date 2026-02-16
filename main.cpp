@@ -623,7 +623,7 @@ int main( int argc, char * argv[] )
         }
 
 
-//        aaInscribedPolygon(m_renderer, 200, 200, 50, 8, 255, 0, 0, 255);
+        // aaInscribedPolygon(m_renderer, 200, 200, 50, 8, 255, 0, 0, 255);
         drawBlock1(m_renderer, second_block);
         drawBlock1(m_renderer, third_block);
         drawBlock1(m_renderer, fourth_block);
@@ -632,11 +632,7 @@ int main( int argc, char * argv[] )
 
 
 
-
-
-
-
-        //sprites show box (stage)
+        //sprites show box (stage part)
 
 
         // SDL_Rect playerrect1 = {player1.x, player1.y, player1.w, player1.h};
@@ -648,33 +644,9 @@ int main( int argc, char * argv[] )
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         SDL_RenderPresent(m_renderer);
         SDL_Delay(16);
     }
-
-
-
-
-
-
-
-
 
 
 
