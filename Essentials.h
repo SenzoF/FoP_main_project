@@ -5,6 +5,7 @@
 #ifndef FOP_MAIN_PROJECT_SOROUSH_ESSENTIALS_H
 #define FOP_MAIN_PROJECT_SOROUSH_ESSENTIALS_H
 
+
 #include <iostream>
 #include <functional>
 #include <SDL2/SDL.h>
@@ -15,6 +16,9 @@
 #include <map>
 #include <algorithm>
 #include <cmath>
+#include <string>
+#include <conio.h>
+#include <cstring>
 
 using namespace std;
 

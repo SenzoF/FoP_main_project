@@ -4,8 +4,10 @@
 #include "Shapes.h"
 #include "Essentials.h"
 #include "DragFunc.h"
+#include "Motion.h"
 
-int main( int argc, char * argv[] ) {
+int main( int argc, char * argv[] )
+{
     Uint32 SDL_flags = SDL_INIT_VIDEO | SDL_INIT_TIMER ;
     Uint32 WND_flags = SDL_WINDOW_SHOWN;
     SDL_Window * m_window;
@@ -60,6 +62,12 @@ int main( int argc, char * argv[] ) {
     third_block.font = code_block;
     //    third_block.input1 = "100";
     third_block.input2 = "100";
+
+    block1 fourth_block = {100, 450, 200, 40, blue};
+    fourth_block.opCode = "turn";
+    fourth_block.font = code_block;
+    //    fourth_block.input1 = "100";
+    fourth_block.input2 = "100";
 
 
 
@@ -259,6 +267,30 @@ int main( int argc, char * argv[] ) {
     int dragmouseY;
     bool mousebl2=false;
     bool mousebl3=false;
+    bool mousebl4=false;
+
+
+
+    //sprites
+
+    int leaveblock=0;
+
+    // mainsprite player1;
+    // player1.texture = loadtexture("images/player.png", m_renderer);
+    // player1.x = 1000;
+    // player1.y = 200;
+    // player1.w = 50;
+    // player1.h = 50;
+
+    mainsprite player2;
+    player2.texture = loadtexture("images/player.png", m_renderer);
+    player2.x = 1000;
+    player2.y = 300;
+    player2.w = 100;
+    player2.h = 100;
+    player2.setcenter();
+
+
 
 
     //this is where the real stuff is happening.
@@ -271,8 +303,10 @@ int main( int argc, char * argv[] ) {
             if (e.type == SDL_KEYDOWN) {
                 if (e.key.keysym.sym == SDLK_ESCAPE)Running = false;
             }
+
             //for checking click on different icons.
             if(e.type == SDL_MOUSEBUTTONDOWN){
+
                 if(e.button.button == SDL_BUTTON_LEFT){
                     if(PointInCurveyRect(&curser, &code_menu_button)){
                         clicked_code_menu = true;
@@ -335,6 +369,20 @@ int main( int argc, char * argv[] ) {
 
                         mousebl3 = true;
                     }
+                    if (mouseIsInside(fourth_block, dragmouseX, dragmouseY)) {
+                        dragging = true;
+                        drag_x = dragmouseX-fourth_block.x;
+                        drag_y = dragmouseY-fourth_block.y;
+
+                        mousebl4 = true;
+                    }
+
+
+
+
+
+
+
                 }
             }
             if (e.type == SDL_MOUSEBUTTONUP) {
@@ -342,6 +390,20 @@ int main( int argc, char * argv[] ) {
                     dragging = false;
                     mousebl2 = false;
                     mousebl3 = false;
+                    mousebl4 = false;
+
+                }
+
+                //sprite control
+
+                if (mouseIsInside(second_block, dragmouseX, dragmouseY)) {
+                    move_n_step(true,10,player2);
+                }
+                if (mouseIsInside(third_block, dragmouseX, dragmouseY)) {
+                    turn_right_n_degree(10,player2);
+                }
+                if (mouseIsInside(fourth_block, dragmouseX, dragmouseY)) {
+                    turn_right_n_degree(-10,player2);
                 }
             }
             if (e.type == SDL_MOUSEMOTION) {
@@ -353,12 +415,21 @@ int main( int argc, char * argv[] ) {
                     third_block.x = e.motion.x-drag_x;
                     third_block.y = e.motion.y-drag_y;
                 }
+                if (dragging&&mousebl4) {
+                    fourth_block.x = e.motion.x-drag_x;
+                    fourth_block.y = e.motion.y-drag_y;
+                }
             }
 
         }
 
         //magnet
-        magnet1(second_block, third_block);
+        magnetup(second_block, third_block);
+        magnetup(third_block, fourth_block);
+        magnetup(second_block, fourth_block);
+        magnetdown(second_block, third_block);
+        magnetdown(third_block, fourth_block);
+        magnetdown(second_block, fourth_block);
 
 
 
@@ -555,6 +626,28 @@ int main( int argc, char * argv[] ) {
 //        aaInscribedPolygon(m_renderer, 200, 200, 50, 8, 255, 0, 0, 255);
         drawBlock1(m_renderer, second_block);
         drawBlock1(m_renderer, third_block);
+        drawBlock1(m_renderer, fourth_block);
+
+
+
+
+
+
+
+
+
+        //sprites show box (stage)
+
+
+        // SDL_Rect playerrect1 = {player1.x, player1.y, player1.w, player1.h};
+        // SDL_RenderCopy(m_renderer,player1.texture, nullptr, &playerrect1);
+
+        SDL_Rect playerrect2 = {player2.x, player2.y, player2.w, player2.h};
+        SDL_RenderCopyEx(m_renderer,player2.texture, nullptr, &playerrect2,player2.angle , &player2.center , player2.flip);
+
+
+
+
 
 
 
@@ -585,11 +678,15 @@ int main( int argc, char * argv[] ) {
 
 
 
+    SDL_DestroyTexture(player2.texture);
     //Finalize and free resources
     SDL_DestroyWindow( m_window );
     SDL_DestroyRenderer( m_renderer );
 
+
     IMG_Quit();
     SDL_Quit();
+
     return 0;
+
 }

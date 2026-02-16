@@ -54,5 +54,13 @@ SDL_Color dark_deep_orange = {204, 102, 0, 255};
 SDL_Color pink = {255, 0, 127, 255};
 SDL_Color dark_pink = {204, 102, 102, 255};
 
+SDL_Texture* loadtexture(const string &path, SDL_Renderer *renderer) {
+    SDL_Surface* surface = IMG_Load(path.c_str());
+
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    return texture;
+}
+
 
 #endif //FOP_MAIN_PROJECT_SOROUSH_TEXTURES_H
