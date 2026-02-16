@@ -55,6 +55,33 @@ struct block2 {
 
 
 
+
+
+struct mainsprite {
+    int x, y, w, h;
+
+
+    SDL_Texture* texture;
+    double angle=0;
+    SDL_RendererFlip flip =SDL_FLIP_NONE;
+    SDL_Point center;
+
+    void setcenter() {
+        center.x = w/2;
+        center.y = h/2;
+    }
+
+
+    bool isFacingRight;
+
+
+
+};
+
+
+
+
+
 //helper
 int shadow(int color){
     return int(color* shadow_factor);
