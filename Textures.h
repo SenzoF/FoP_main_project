@@ -1,9 +1,8 @@
-//
-// Created by USER on 2/16/2026.
-//
 
-#ifndef FOP_MAIN_PROJECT_SOROUSH_TEXTURES_H
-#define FOP_MAIN_PROJECT_SOROUSH_TEXTURES_H
+
+#ifndef GITTESTT_TEXTURES_H
+#define GITTESTT_TEXTURES_H
+
 
 #include "Essentials.h"
 
@@ -53,6 +52,7 @@ SDL_Color deep_orange = {255, 128, 0, 255};
 SDL_Color dark_deep_orange = {204, 102, 0, 255};
 SDL_Color pink = {255, 0, 127, 255};
 SDL_Color dark_pink = {204, 102, 102, 255};
+SDL_Color light_gray = {200, 200, 200, 255};
 
 SDL_Texture* loadtexture(const string &path, SDL_Renderer *renderer) {
     SDL_Surface* surface = IMG_Load(path.c_str());
@@ -62,5 +62,4 @@ SDL_Texture* loadtexture(const string &path, SDL_Renderer *renderer) {
     return texture;
 }
 
-
-#endif //FOP_MAIN_PROJECT_SOROUSH_TEXTURES_H
+#endif //GITTESTT_TEXTURES_H

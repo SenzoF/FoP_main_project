@@ -1,10 +1,7 @@
-//
-// Created by USER on 2/16/2026.
-//
 
-#ifndef FOP_MAIN_PROJECT_SOROUSH_ESSENTIALS_H
-#define FOP_MAIN_PROJECT_SOROUSH_ESSENTIALS_H
 
+#ifndef GITTESTT_ESSENTIALS_H
+#define GITTESTT_ESSENTIALS_H
 
 #include <iostream>
 #include <functional>
@@ -19,7 +16,8 @@
 #include <string>
 #include <conio.h>
 #include <cstring>
+#include <SDL2/SDL_mixer.h>
 
 using namespace std;
 
-#endif //FOP_MAIN_PROJECT_SOROUSH_ESSENTIALS_H
+#endif //GITTESTT_ESSENTIALS_H
